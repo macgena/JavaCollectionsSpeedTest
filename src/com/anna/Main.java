@@ -23,12 +23,11 @@ public class Main {
     }
 
     private static void testHashMapVSTreeMap() {
-        long start, end, diff1, diff2;
+        long start, end, time1, time2;
         HashMapTest hashMapTest = new HashMapTest();
         TreeMapTest treeMapTest = new TreeMapTest();
-
-
-        // NOTE: Test of getting items by index
+        PerformanceTestRunner testRunner = new PerformanceTestRunner();
+        
         System.out.println("------------------------------------------------------------------------");
         System.out.println("|              HashMap            VS            TreeMap                |");
         System.out.println("------------------------------------------------------------------------");
@@ -37,105 +36,66 @@ public class Main {
         System.out.println("|                     INITIALIZE TIME (in order)                       |");
         System.out.println("------------------------------------------------------------------------");
 
-        start = System.nanoTime();
-        hashMapTest.initializeInOrder();
-        end = System.nanoTime();
-        diff1 = end - start;
-        System.out.println("HashMap initialize time (in order): " + diff1);
+        time1 = testRunner.runTest("HashMap","initialize time (in order)", hashMapTest::initializeInOrder);
         hashMapTest.reset();
 
-        start = System.nanoTime();
-        treeMapTest.initializeInOrder();
-        end = System.nanoTime();
-        diff2 = end - start;
-        System.out.println("TreeMap initialize time (in order): " + diff2);
+        time2 = testRunner.runTest("TreeMap", "initialize time (in order)", treeMapTest::initializeInOrder);
         treeMapTest.reset();
 
-        System.out.println("HashMap faster in: " + (diff2 / (double) diff1) + " times");
+        System.out.println("HashMap faster in: " + (time2 / (double) time1) + " times");
 
 
         System.out.println("------------------------------------------------------------------------");
         System.out.println("|                 INITIALIZE TIME (reverse order)                      |");
         System.out.println("------------------------------------------------------------------------");
-
-        start = System.nanoTime();
-        hashMapTest.initializeWithReverseOrder();
-        end = System.nanoTime();
-        diff1 = end - start;
-        System.out.println("HashMap initialize time (reverse order): " + diff1);
+        
+        time1 = testRunner.runTest("HashMap","initialize time (in order)", hashMapTest::initializeWithReverseOrder);
         hashMapTest.reset();
 
-        start = System.nanoTime();
-        treeMapTest.initializeWithReverseOrder();
-        end = System.nanoTime();
-        diff2 = end - start;
-        System.out.println("TreeMap initialize time (reverse order): " + diff2);
+        time2 = testRunner.runTest("TreeMap","initialize time (reverse order)", treeMapTest::initializeWithReverseOrder);
         treeMapTest.reset();
 
-        System.out.println("HashMap faster in: " + (diff2 / (double) diff1) + " times");
+        System.out.println("HashMap faster in: " + (time2 / (double) time1) + " times");
 
 
         System.out.println("------------------------------------------------------------------------");
         System.out.println("|                 INITIALIZE TIME (random order)                       |");
         System.out.println("------------------------------------------------------------------------");
 
-        start = System.nanoTime();
-        hashMapTest.initializeWithRandomOrder();
-        end = System.nanoTime();
-        diff1 = end - start;
-        System.out.println("HashMap initialize time (random order): " + diff1);
+        time1 = testRunner.runTest("HashMap","initialize time (random order)", hashMapTest::initializeWithRandomOrder);
 
-        start = System.nanoTime();
-        treeMapTest.initializeWithRandomOrder();
-        end = System.nanoTime();
-        diff2 = end - start;
-        System.out.println("TreeMap initialize time (random order): " + diff2);
+        time2 = testRunner.runTest("TreeMap","initialize time (random order)", treeMapTest::initializeWithRandomOrder);
 
-        System.out.println("HashMap faster in: " + (diff2 / (double) diff1) + " times");
+        System.out.println("HashMap faster in: " + (time2 / (double) time1) + " times");
 
 
         System.out.println("------------------------------------------------------------------------");
         System.out.println("|                             REMOVE TIME                              |");
         System.out.println("------------------------------------------------------------------------");
 
-        start = System.nanoTime();
-        hashMapTest.removeRandomElements();
-        end = System.nanoTime();
-        diff1 = end - start;
-        System.out.println("HashMap remove time: " + diff1);
+        time1 = testRunner.runTest("HashMap","remove time", hashMapTest::removeRandomElements);
 
-        start = System.nanoTime();
-        treeMapTest.removeRandomElements();
-        end = System.nanoTime();
-        diff2 = end - start;
-        System.out.println("TreeMap remove time: " + diff2);
+        time2 = testRunner.runTest("TreeMap","remove time", treeMapTest::removeRandomElements);
 
-        System.out.println("HashMap faster in: " + (diff2 / (double) diff1) + " times");
+        System.out.println("HashMap faster in: " + (time2 / (double) time1) + " times");
 
 
         System.out.println("------------------------------------------------------------------------");
         System.out.println("|                             GET TIME                                 |");
         System.out.println("------------------------------------------------------------------------");
 
-        start = System.nanoTime();
-        hashMapTest.getRandomElements();
-        end = System.nanoTime();
-        diff1 = end - start;
-        System.out.println("HashMap get time: " + diff1);
+        time1 = testRunner.runTest("HashMap","get time", hashMapTest::getRandomElements);
 
-        start = System.nanoTime();
-        treeMapTest.getRandomElements();
-        end = System.nanoTime();
-        diff2 = end - start;
-        System.out.println("TreeMap get time: " + diff2);
+        time2 = testRunner.runTest("TreeMap","remove time", treeMapTest::getRandomElements);
 
-        System.out.println("HashMap faster in: " + (diff2 / (double) diff1) + " times");
+        System.out.println("HashMap faster in: " + (time2 / (double) time1) + " times");
     }
 
     private static void testHashSetVSTreeSet() {
-        long start, end, diff1, diff2;
+        long start, end, time1, time2;
         HashSetTest hashSetTest = new HashSetTest();
         TreeSetTest treeSetTest = new TreeSetTest();
+        PerformanceTestRunner testRunner = new PerformanceTestRunner();
 
 
         // NOTE: Test of getting items by index
@@ -147,107 +107,67 @@ public class Main {
         System.out.println("|                     INITIALIZE TIME (in order)                       |");
         System.out.println("------------------------------------------------------------------------");
 
-        start = System.nanoTime();
-        hashSetTest.initializeInOrder();
-        end = System.nanoTime();
-        diff1 = end - start;
-        System.out.println("HashSet initialize time (in order): " + diff1);
+        time1 = testRunner.runTest("HashSet","initialize time(in order)", hashSetTest::initializeInOrder);
         hashSetTest.reset();
 
-        start = System.nanoTime();
-        treeSetTest.initializeInOrder();
-        end = System.nanoTime();
-        diff2 = end - start;
-        System.out.println("TreeSet initialize time (in order): " + diff2);
+        time2 = testRunner.runTest("TreeSet","initialize time(in order)", treeSetTest::initializeInOrder);
         treeSetTest.reset();
 
-        System.out.println("HashSet faster in: " + (diff2 / (double) diff1) + " times");
+        System.out.println("HashSet faster in: " + (time2 / (double) time1) + " times");
 
 
         System.out.println("------------------------------------------------------------------------");
         System.out.println("|                 INITIALIZE TIME (reverse order)                      |");
         System.out.println("------------------------------------------------------------------------");
 
-        start = System.nanoTime();
-        hashSetTest.initializeWithReverseOrder();
-        end = System.nanoTime();
-        diff1 = end - start;
-        System.out.println("HashSet initialize time (reverse order): " + diff1);
+        time1 = testRunner.runTest("HashSet","initialize time(reverse order)", hashSetTest::initializeWithReverseOrder);
         hashSetTest.reset();
 
-        start = System.nanoTime();
-        treeSetTest.initializeWithReverseOrder();
-        end = System.nanoTime();
-        diff2 = end - start;
-        System.out.println("TreeSet initialize time (reverse order): " + diff2);
+        time2 = testRunner.runTest("TreeSet","initialize time(reverse order)", treeSetTest::initializeWithReverseOrder);
         treeSetTest.reset();
 
-        System.out.println("HashSet faster in: " + (diff2 / (double) diff1) + " times");
+        System.out.println("HashSet faster in: " + (time2 / (double) time1) + " times");
 
 
         System.out.println("------------------------------------------------------------------------");
         System.out.println("|                 INITIALIZE TIME (random order)                       |");
         System.out.println("------------------------------------------------------------------------");
 
-        start = System.nanoTime();
-        hashSetTest.initializeWithRandomOrder();
-        end = System.nanoTime();
-        diff1 = end - start;
-        System.out.println("HashSet initialize time (random order): " + diff1);
+        time1 = testRunner.runTest("HashSet","initialize time(random order)", hashSetTest::initializeWithRandomOrder);
 
-        start = System.nanoTime();
-        treeSetTest.initializeWithRandomOrder();
-        end = System.nanoTime();
-        diff2 = end - start;
-        System.out.println("TreeSet initialize time (random order): " + diff2);
+        time2 = testRunner.runTest("TreeSet","initialize time(random order)", treeSetTest::initializeWithRandomOrder);
 
-        System.out.println("HashSet faster in: " + (diff2 / (double) diff1) + " times");
+        System.out.println("HashSet faster in: " + (time2 / (double) time1) + " times");
 
 
         System.out.println("------------------------------------------------------------------------");
         System.out.println("|                             REMOVE TIME                              |");
         System.out.println("------------------------------------------------------------------------");
 
-        start = System.nanoTime();
-        hashSetTest.removeRandomElements();
-        end = System.nanoTime();
-        diff1 = end - start;
-        System.out.println("HashSet remove time: " + diff1);
+        time1 = testRunner.runTest("HashSet","remove time", hashSetTest::removeRandomElements);
 
-        start = System.nanoTime();
-        treeSetTest.removeRandomElements();
-        end = System.nanoTime();
-        diff2 = end - start;
-        System.out.println("TreeSet remove time: " + diff2);
+        time2 = testRunner.runTest("TreeSet","remove time", treeSetTest::removeRandomElements);
 
-        System.out.println("HashSet faster in: " + (diff2 / (double) diff1) + " times");
+        System.out.println("HashSet faster in: " + (time2 / (double) time1) + " times");
 
 
         System.out.println("------------------------------------------------------------------------");
         System.out.println("|                           CONTAINS TIME                              |");
         System.out.println("------------------------------------------------------------------------");
 
-        start = System.nanoTime();
-        hashSetTest.checkIfContainsValue();
-        end = System.nanoTime();
-        diff1 = end - start;
-        System.out.println("HashSet contains time: " + diff1);
+        time1 = testRunner.runTest("HashSet","contains time", hashSetTest::checkIfContainsValue);
 
-        start = System.nanoTime();
-        treeSetTest.checkIfContainsValue();
-        end = System.nanoTime();
-        diff2 = end - start;
-        System.out.println("TreeSet contains time: " + diff2);
+        time2 = testRunner.runTest("TreeSet","contains time", treeSetTest::checkIfContainsValue);
 
-        System.out.println("HashSet faster in: " + (diff2 / (double) diff1) + " times");
+        System.out.println("HashSet faster in: " + (time2 / (double) time1) + " times");
     }
 
     private static void testArrayListVSLinkedList() {
-        long start, end, diff1, diff2;
-        LinkedListTest b = new LinkedListTest();
-        ArrayListTest a = new ArrayListTest();
+        long start, end, time1, time2;
+        LinkedListTest linkedListTest = new LinkedListTest();
+        ArrayListTest arrayListTest = new ArrayListTest();
+        PerformanceTestRunner testRunner = new PerformanceTestRunner();
 
-        // NOTE: Test of getting items by index
         System.out.println("------------------------------------------------------------------------");
         System.out.println("|              ArrayList            VS            LinkedList           |");
         System.out.println("------------------------------------------------------------------------");
@@ -256,75 +176,41 @@ public class Main {
         System.out.println("|                            INITIALIZE TIME                           |");
         System.out.println("------------------------------------------------------------------------");
 
-        start = System.nanoTime();
-        a.initializeWithRandomOrder();
-        end = System.nanoTime();
-        diff1 = end - start;
-        System.out.println("Array list initialize time: " + diff1);
+        time1 = testRunner.runTest("ArrayList","initialize time", arrayListTest::initializeWithRandomOrder);
 
+        time2 = testRunner.runTest("LinkedList","initialize time", linkedListTest::initializeWithRandomOrder);
 
-        start = System.nanoTime();
-        b.initializeWithRandomOrder();
-        end = System.nanoTime();
-        diff2 = end - start;
-        System.out.println("Linked list initialize time: " + diff2);
-
-        System.out.println("ArrayList faster in: " + (diff2 / (double) diff1) + " times");
+        System.out.println("ArrayList faster in: " + (time2 / (double) time1) + " times");
 
         System.out.println("------------------------------------------------------------------------");
         System.out.println("|                     GET ELEMENT BY INDEX(random)                     |");
         System.out.println("------------------------------------------------------------------------");
 
-        start = System.nanoTime();
-        a.getElementsByIndex();
-        end = System.nanoTime();
-        diff1 = end - start;
-        System.out.println("Array list gets time: " + diff1);
+        time1 = testRunner.runTest("ArrayList","get time", arrayListTest::getElementsByIndex);
 
-        start = System.nanoTime();
-        b.getElementsByIndex();
-        end = System.nanoTime();
-        diff2 = end - start;
-        System.out.println("Linked list gets time: " + diff2);
+        time2 = testRunner.runTest("LinkedList","get time", linkedListTest::getElementsByIndex);
 
-        System.out.println("ArrayList faster in: " + (diff2 / (double) diff1) + " times");
+        System.out.println("ArrayList faster in: " + (time2 / (double) time1) + " times");
 
-        // NOTE: Test of inserting items inside Lists
+
         System.out.println("------------------------------------------------------------------------");
         System.out.println("|                           INSERT INTO ARRAY (random)                 |");
         System.out.println("------------------------------------------------------------------------");
 
-        start = System.nanoTime();
-        a.insertElementInside();
-        end = System.nanoTime();
-        diff1 = end - start;
-        System.out.println("Array list gets time: " + diff1);
+        time1 = testRunner.runTest("ArrayList","insert time", arrayListTest::insertElementInside);
 
-        start = System.nanoTime();
-        b.insertElementInside();
-        end = System.nanoTime();
-        diff2 = end - start;
-        System.out.println("Linked list gets time: " + diff2);
+        time2 = testRunner.runTest("LinkedList","insert time", linkedListTest::insertElementInside);
 
-        System.out.println("ArrayList faster in: " + (diff2 / (double) diff1) + " times");
+        System.out.println("ArrayList faster in: " + (time2 / (double) time1) + " times");
 
-        // NOTE: Test of removing items from Lists
         System.out.println("------------------------------------------------------------------------");
         System.out.println("|                         REMOVE ITEMS FROM ARRAY                       |");
         System.out.println("------------------------------------------------------------------------");
 
-        start = System.nanoTime();
-        a.removeElements();
-        end = System.nanoTime();
-        diff1 = end - start;
-        System.out.println("Array list time: " + diff1);
+        time1 = testRunner.runTest("ArrayList","remove time", arrayListTest::removeElements);
 
-        start = System.nanoTime();
-        b.removeElements();
-        end = System.nanoTime();
-        diff2 = end - start;
-        System.out.println("Linked list time: " + diff2);
+        time2 = testRunner.runTest("LinkedList","remove time", linkedListTest::removeElements);
 
-        System.out.println("ArrayList faster in: " + (diff2 / (double) diff1) + " times");
+        System.out.println("ArrayList faster in: " + (time2 / (double) time1) + " times");
     }
 }
