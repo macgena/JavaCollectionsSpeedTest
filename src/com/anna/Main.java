@@ -1,11 +1,11 @@
 package com.anna;
 
 public class Main {
-    public static final int ELEMENTS_COUNT = 10000;
+    public static final int ELEMENTS_COUNT = 100000;
     public static final int TEST_COUNT = 1000;
 
     public static void main(String[] args) {
-//        testArrayListVSLinkedList();
+        testArrayListVSLinkedList();
         System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         System.out.println();
         System.out.println();
@@ -244,6 +244,8 @@ public class Main {
 
     private static void testArrayListVSLinkedList() {
         long start, end, diff1, diff2;
+        LinkedListTest b = new LinkedListTest();
+        ArrayListTest a = new ArrayListTest();
 
         // NOTE: Test of getting items by index
         System.out.println("------------------------------------------------------------------------");
@@ -255,13 +257,14 @@ public class Main {
         System.out.println("------------------------------------------------------------------------");
 
         start = System.nanoTime();
-        ArrayListTest a = new ArrayListTest();
+        a.initializeWithRandomOrder();
         end = System.nanoTime();
         diff1 = end - start;
         System.out.println("Array list initialize time: " + diff1);
 
+
         start = System.nanoTime();
-        LinkedListTest b = new LinkedListTest();
+        b.initializeWithRandomOrder();
         end = System.nanoTime();
         diff2 = end - start;
         System.out.println("Linked list initialize time: " + diff2);
